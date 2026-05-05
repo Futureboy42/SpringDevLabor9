@@ -16,9 +16,12 @@ public class Document {
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private DocumentContent documentContent;
 
-    public Document(String title, String description) {
+    private String etag;
+
+    public Document(String title, String description, String etag) {
         this.title = title;
         this.description = description;
+        this.etag = etag;
     }
 
     public Long getId() {

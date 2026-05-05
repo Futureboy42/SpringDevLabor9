@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.Optional;
 import java.util.Base64;
 
-@RestController
+//@RestController
 public class DocumentController2 implements DocumentControllerApi {
 
     @Autowired

@@ -6,7 +6,7 @@ servers:
   - url: http://localhost:8080
     description: Generated server url
 paths:
-  /api2/documents:
+  /api/documents:
     post:
       tags:
         - document-controller
@@ -24,7 +24,7 @@ paths:
             'application.json':
               schema:
                 $ref: "#/components/schemas/CreateDocumentResponse"
-  /api2/documents/{id}/download:
+  /api/documents/{id}/download:
     get:
       tags:
         - document-controller
