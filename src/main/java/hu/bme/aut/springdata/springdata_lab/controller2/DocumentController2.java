@@ -8,25 +8,47 @@ import hu.bme.aut.springdata.springdata_lab.entity.Document;
 import hu.bme.aut.springdata.springdata_lab.entity.DocumentContent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+import java.util.Optional;
 import java.util.Base64;
 
 @RestController
 public class DocumentController2 implements DocumentControllerApi {
-    //@Autowired
-    //private DocumentRepository documentRepository;
+
+    @Autowired
+    private DocumentRepository documentRepository;
 
     @Override
     public ResponseEntity<CreateDocumentResponse> create(CreateDocumentRequest req) {
-        var doc = new Document(req.getTitle(), req.getDescription());
-        var docContent = new DocumentContent(req.getContentType(), Base64.getDecoder().decode(req.getContentBase64()));
+        Document doc = new Document(req.getTitle(), req.getDescription());
+
+        byte[] fileContent = Base64.getDecoder().decode(req.getContentBase64());
+
+        DocumentContent docContent = new DocumentContent(null, req.getContentType(), fileContent);
         doc.setDocumentContent(docContent);
-        //documentRepository.save(doc);
-        return DocumentControllerApi.super.create(req);
+
+        documentRepository.save(doc);
+
+        CreateDocumentResponse response = new CreateDocumentResponse();
+        response.setId(doc.getId());
+
+        return ResponseEntity.ok(response);
     }
 
     @Override
     public ResponseEntity<byte[]> download(Long id) {
-        return DocumentControllerApi.super.download(id);
+        Optional<Document> docOpt = documentRepository.findByIdFetchDocumentContent(id);
+
+        if (docOpt.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
+
+        Document doc = docOpt.get();
+
+        return ResponseEntity.ok()
+                .header("Content-Type", doc.getDocumentContent().getContentType())
+                .body(doc.getDocumentContent().getPayload());
     }
 }
