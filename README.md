@@ -1,0 +1,1 @@
+This project demonstrates a Spring Boot application for handling document uploads and downloads with optimized binary data management. It focuses on JPA lazy loading, OpenAPI generation, and HTTP caching strategies.
