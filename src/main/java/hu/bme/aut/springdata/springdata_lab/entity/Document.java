@@ -28,6 +28,14 @@ public class Document {
         return id;
     }
 
+    public String getEtag() {
+        return etag;
+    }
+
+    public void setEtag(String etag) {
+        this.etag = etag;
+    }
+
     public void setId(Long id) {
         this.id = id;
     }

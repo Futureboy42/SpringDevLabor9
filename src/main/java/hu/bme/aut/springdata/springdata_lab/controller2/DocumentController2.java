@@ -1,5 +1,5 @@
 package hu.bme.aut.springdata.springdata_lab.controller2;
-
+/*
 import hu.bme.aut.springdata.springdata_lab.api.DocumentControllerApi;
 import hu.bme.aut.springdata.springdata_lab.api.model.CreateDocumentRequest;
 import hu.bme.aut.springdata.springdata_lab.api.model.CreateDocumentResponse;
@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.Optional;
 import java.util.Base64;
 
-//@RestController
+@RestController
 public class DocumentController2 implements DocumentControllerApi {
 
     @Autowired
@@ -52,3 +52,4 @@ public class DocumentController2 implements DocumentControllerApi {
                 .body(doc.getDocumentContent().getPayload());
     }
 }
+*/

@@ -11,7 +11,7 @@ public class SpringdataLabApplication implements CommandLineRunner {
     public void run(String... args) {
     }
 
-    static void main(String[] args) {
+    public static void main(String[] args) {
         SpringApplication.run(SpringdataLabApplication.class, args);
     }
 
